@@ -36,7 +36,10 @@ You can send messages to WonderQ and see the demo queue stats at our [front end]
 
 ## Endpoints
 
+### Create a queue
+
 **POST /init**
+
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/init
 
 Parameters: body - required
@@ -48,12 +51,17 @@ Creates a new queue, returns confirmation.
 
 **Please note**: current code for below endpoints hardcodes queue name as 'myqueue'. Expect this to be updated in future versions.
 
+### Get list of queues
+
 **GET /queues**
+
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/queues
 
 _Parameters:_ none
 
 Returns a list of all queues.
+
+### Send a message to the queue
 
 **POST /messages/send**
 
@@ -66,13 +74,15 @@ Ex:
 
 Adds message to queue, returns message ID.
 
+### Grab a message from the queue
+
 **GET /messages/receive**
 
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/messages/receive
 
 _Parameters:_ none
 
-Returns top (visible) message from the queue.
+Returns top (visible) message from the queue. Makes message invisible for 30 seconds.
 
 **POST /messages/delete**
 
@@ -82,6 +92,8 @@ _Parameters:_ body = messageID - required
 
 Ex:
 `{ 'f08zycfmxp0M0vQWGweN5hI4mwUxgncc' }`
+
+### Get Developer Info
 
 **GET /info**
 
