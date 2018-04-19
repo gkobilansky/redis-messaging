@@ -1,0 +1,119 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WonderQ - Live in the queue</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">WonderQ</h1>
+          <h2 class="subtitle">Ask me anything</h2>
+        </div>
+      </div>
+    </section>
+  <section class="section">
+    <div class="notification" v-bind:class="{'is-primary': messageComplete}" v-if="notify">
+      <button class="delete" @click="notify=null"></button>
+      {{ notify }}
+    </div>
+    <div class="field">
+      <label class="label">Message</label>
+      <div class="control">
+        <textarea v-model="message" @keyup="notify=''; messageComplete=false" class="textarea" placeholder="Send us your message"></textarea>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-link" @click="submitMessage" v-bind:disabled="!message">Submit</button>
+      </div>
+    </div>
+</section>
+<section class="section">
+  <h3>Queue Info</h3>
+  <button class="button is-pulled-right" @click="getQueueInfo">Refresh</button>
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Visibility Timeout</th>
+      <th>Total Messages Received</th>
+      <th>Total Messages Sent</th>
+      <th>Messages in Queue</th>
+      <th>Hidden Messages in Queue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ queue.vt }}</td>
+      <td>{{ queue.totalrecv }}</td>
+      <td>{{queue.totalsent}}</td>
+      <td>{{queue.msgs}}</td>
+      <td>{{queue.hiddenmsgs}}</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+  </div>
+</body>
+<script type="text/javascript">
+axios.defaults.baseURL =
+  'https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev';
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: '',
+    notify: '',
+    queue: {},
+    messageComplete: false
+  },
+  created: function() {
+    this.getQueueInfo();
+  },
+  methods: {
+    submitMessage: function() {
+      this.notify = 'Sending message';
+      let message = this.message;
+      axios({
+        method: 'post',
+        url: '/messages/send',
+        data: {
+          body: message
+        }
+      })
+        .then(response => {
+          this.notify = 'Sening message complete. ID: ' + response.data;
+          this.message = '';
+          this.messageComplete = true;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getQueueInfo: function() {
+      axios
+        .get('/info')
+        .then(response => {
+          Vue.set(app.queue, 'vt', response.data.vt);
+          Vue.set(app.queue, 'totalrecv', response.data.totalrecv);
+          Vue.set(app.queue, 'totalsent', response.data.totalsent);
+          Vue.set(app.queue, 'msgs', response.data.msgs);
+          Vue.set(app.queue, 'hiddenmsgs', response.data.hiddenmsgs);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
+});
+</script>
+
+</html>

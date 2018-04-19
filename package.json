@@ -1,0 +1,29 @@
+{
+  "name": "wonderq",
+  "version": "1.0.0",
+  "description": "a quick queue using redis and serverless framework",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rsmq": "^0.8.3",
+    "rsmq-promise": "^1.0.1",
+    "serverless-finch": "^1.4.0",
+    "serverless-http": "^1.5.5"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-source-map-support": "^2.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "serverless-webpack": "^5.1.1",
+    "webpack": "^4.6.0",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

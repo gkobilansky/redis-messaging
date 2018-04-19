@@ -1,0 +1,63 @@
+service: wonderq
+plugins:
+  - serverless-webpack
+  - serverless-finch
+custom:
+  webpackIncludeModules: true
+  client:
+    bucketName: quick-start-dev-serverlessdeploymentbucket-ntikgcvze067
+
+provider:
+  name: aws
+  vpc:
+   securityGroupIds:
+     - sg-2547fb43
+   subnetIds:
+     - subnet-4814e13e
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+
+functions:
+  init:
+      handler: handler.init
+      events:
+        - http:
+            path: /init
+            method: post
+            cors: true
+  listQueues:
+    handler: handler.listQueues
+    events:
+      - http:
+          path: /queues
+          method: get
+          cors: true
+  sendMessage:
+    handler: handler.sendMessage
+    events:
+      - http:
+          path: /messages/send
+          method: post
+          cors: true
+  receiveMessage:
+      handler: handler.receiveMessage
+      events:
+        - http:
+            path: /messages/receive
+            method: get
+            cors: true
+  deleteMessage:
+    handler: handler.deleteMessage
+    events:
+      - http:
+          path: /messages/delete
+          method: post
+          cors: true
+  getInfo:
+    handler: handler.getInfo
+    events:
+      - http:
+          path: /info
+          method: get
+          cors: true
