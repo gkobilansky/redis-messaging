@@ -40,45 +40,53 @@ You can send messages to WonderQ and see the demo queue stats at our [front end]
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/init
 
 Parameters: body - required
+
 Ex:
 `{ 'name': 'myqueue', 'vt': 30 }`
 
-Creates a new queue.
+Creates a new queue, returns confirmation.
 
 **Please note**: current code for below endpoints hardcodes queue name as 'myqueue'. Expect this to be updated in future versions.
 
 **GET /queues**
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/queues
 
-Parameters: none
+_Parameters:_ none
 
-Lists all queues.
+Returns a list of all queues.
 
 **POST /messages/send**
+
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/messages/send
-Parameters: body - required
+
+_Parameters:_ body - required
+
 Ex:
 `{ 'my message' }`
 
 Adds message to queue, returns message ID.
 
 **GET /messages/receive**
+
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/messages/receive
 
-Parameters: none
+_Parameters:_ none
 
-Receive top (visible) message from the queue.
+Returns top (visible) message from the queue.
 
 **POST /messages/delete**
+
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/messages/delete
 
-Parameters: body -> messageID - required
+_Parameters:_ body = messageID - required
+
 Ex:
 `{ 'f08zycfmxp0M0vQWGweN5hI4mwUxgncc' }`
 
 **GET /info**
+
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/info
 
-Parameters: none
+_Parameters:_ none
 
-Get developer info about the message queue.
+Returns developer info about the message queue.
