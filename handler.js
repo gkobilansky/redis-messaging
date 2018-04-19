@@ -3,8 +3,8 @@ const RSMQPromise = require('rsmq-promise');
 import { success, failure } from './libs/response-lib';
 
 const rsmqOptions = {
-  host: 'wonderq.bewcvz.ng.0001.use1.cache.amazonaws.com',
-  port: 6379,
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
   ns: 'rsmq'
 };
 
@@ -15,9 +15,9 @@ export async function init(event, context, callback) {
   context.callbackWaitsForEmptyEventLoop = false;
 
   const rsmq = new RSMQPromise(rsmqOptions);
-  const queueName = JSON.stringify(event.body.name);
-  const vt = JSON.stringify(event.body.vt);
-  console.log(event.body);
+  const queueInfo = JSON.parse(event.body);
+  const queueName = queueInfo.name;
+  const vt = queueInfo.vt;
 
   function createQueue() {
     return new Promise(function(resolve, reject) {
@@ -85,7 +85,7 @@ export async function listQueues(event, context, callback) {
 export async function sendMessage(event, context, callback) {
   context.callbackWaitsForEmptyEventLoop = false;
 
-  const rsmq = new RSMQPromise({ rsmqOptions });
+  const rsmq = new RSMQPromise(rsmqOptions);
 
   const sentMessage = JSON.stringify(event.body);
   function sendMessageToQueue() {
@@ -129,7 +129,7 @@ export async function sendMessage(event, context, callback) {
 export async function receiveMessage(event, context, callback) {
   context.callbackWaitsForEmptyEventLoop = false;
 
-  const rsmq = new RSMQPromise({ rsmqOptions });
+  const rsmq = new RSMQPromise(rsmqOptions);
 
   function receiveMessageFromQueue() {
     return new Promise(function(resolve, reject) {
@@ -207,7 +207,7 @@ export async function deleteMessage(event, context, callback) {
 export async function getInfo(event, context, callback) {
   context.callbackWaitsForEmptyEventLoop = false;
 
-  const rsmq = new RSMQPromise({ rsmqOptions });
+  const rsmq = new RSMQPromise(rsmqOptions);
 
   function getQueueInfo() {
     return new Promise(function(resolve, reject) {

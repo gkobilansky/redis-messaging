@@ -1,0 +1,12 @@
+{
+  "name": "wonderq",
+  "version": "1.0.0",
+  "description": "Packaged externals for wonderq",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "source-map-support": "",
+    "babel-runtime": "",
+    "rsmq-promise": "^1.0.1"
+  }
+}

@@ -22,7 +22,7 @@ You can send messages to WonderQ and see the demo queue stats at our [front end]
 
 2. Clone the repo
 
-3. To use your own Redis server, update REDIS options in handler.js and the VPC info in serveless.yml (TODO: move redis options to environment variables)
+3. To use your own Redis server, update environment variables and the VPC info in serveless.yml
 
 4. Run `npm install`
 

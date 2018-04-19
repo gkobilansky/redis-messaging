@@ -17,6 +17,9 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: us-east-1
+  environment:
+    REDIS_HOST: wonderq.bewcvz.ng.0001.use1.cache.amazonaws.com
+    REDIS_PORT: '6379'
 
 functions:
   init:
