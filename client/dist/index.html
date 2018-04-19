@@ -90,7 +90,7 @@ var app = new Vue({
         }
       })
         .then(response => {
-          this.notify = 'Sening message complete. ID: ' + response.data;
+          this.notify = 'Sending message complete. ID: ' + response.data;
           this.message = '';
           this.messageComplete = true;
         })
