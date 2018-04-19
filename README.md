@@ -42,12 +42,15 @@ You can send messages to WonderQ and see the demo queue stats at our [front end]
 
 demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/init
 
-Parameters: body - required
+_Parameters:_
+
+* `qname` (String): The Queue name. Maximum 160 characters; alphanumeric characters, hyphens (-), and underscores (\_) are allowed.
+* `vt` (Number): The length of time, in seconds, that a message received from a queue will be invisible to other receiving components when they ask to receive messages. Allowed values: 0-9999999 (around 115 days)
 
 Ex:
 `{ 'name': 'myqueue', 'vt': 30 }`
 
-Creates a new queue, returns confirmation.
+Creates a new queue, returns confirmation. `vt` sets how long a message is invisible for in seconds.
 
 **Please note**: current code for below endpoints hardcodes queue name as 'myqueue'. Expect this to be updated in future versions.
 
