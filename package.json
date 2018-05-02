@@ -1,5 +1,5 @@
 {
-  "name": "wonderq",
+  "name": "redis-messaging",
   "version": "1.0.0",
   "description": "a quick queue using redis and serverless framework",
   "main": "handler.js",
