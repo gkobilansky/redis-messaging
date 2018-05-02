@@ -1,5 +1,4 @@
-# WonderQ
-
+# Redis Messaging - a Serverless example
 A simple message queue using node, Redis and the Serverless framework
 
 ## Features
