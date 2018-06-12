@@ -3,6 +3,8 @@ A simple message queue using node, Redis and the Serverless framework
 
 ## Features
 
+This is a sample setup of a messaging service (instead of using Amazon SMS for example).
+
 * Initialize new queue in your Redis server
 * List available queues
 * Send and receive messages
@@ -11,9 +13,6 @@ A simple message queue using node, Redis and the Serverless framework
 
 **Please note:** although you can initialize multiple queues, current implementation for send/receive/delete works with hardcoded queue name of `myqueue`.
 
-## Demo
-
-You can send messages to WonderQ and see the demo queue stats at our [front end](http://quick-start-dev-serverlessdeploymentbucket-ntikgcvze067.s3-website-us-east-1.amazonaws.com/index.html).
 
 ## Setup
 
@@ -39,7 +38,6 @@ You can send messages to WonderQ and see the demo queue stats at our [front end]
 
 **POST /init**
 
-demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/init
 
 _Parameters:_
 
@@ -57,7 +55,6 @@ Creates a new queue, returns confirmation. `vt` sets how long a message is invis
 
 **GET /queues**
 
-demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/queues
 
 _Parameters:_ none
 
@@ -67,7 +64,6 @@ Returns a list of all queues.
 
 **POST /messages/send**
 
-demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/messages/send
 
 _Parameters:_ body - required
 
@@ -80,7 +76,6 @@ Adds message to queue, returns message ID.
 
 **GET /messages/receive**
 
-demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/messages/receive
 
 _Parameters:_ none
 
@@ -88,7 +83,6 @@ Returns top (visible) message from the queue. Makes message invisible for 30 sec
 
 **POST /messages/delete**
 
-demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/messages/delete
 
 _Parameters:_ body = messageID - required
 
@@ -98,8 +92,6 @@ Ex:
 ### Get Developer Info
 
 **GET /info**
-
-demo: https://rnyin3rr0e.execute-api.us-east-1.amazonaws.com/dev/info
 
 _Parameters:_ none
 
