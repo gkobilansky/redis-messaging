@@ -3,7 +3,7 @@ A simple message queue using node, Redis and the Serverless framework
 
 ## Features
 
-This is a sample setup of a messaging service (instead of using Amazon SMS for example).
+This is a sample setup of a messaging service (instead of using Amazon SNS for example).
 
 * Initialize new queue in your Redis server
 * List available queues
